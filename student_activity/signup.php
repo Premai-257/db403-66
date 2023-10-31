@@ -1,4 +1,5 @@
 <?php
+session_start();
     require 'connection.php';
     if (isset ($_POST['submit'])){
       $studentID = $_POST['studentID'];
@@ -7,8 +8,20 @@
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
       $sql = "insert into 
       student(studentID, studentName, majorID, password) values('{$studentID}', '{$studentName}', '{$major}', '{$password}')";
-      echo $sql;
-      $conn->query($sql);
+      try {
+        $conn->query($sql);
+        $_SESSION['user'] = [
+          'studentID'=> $studentID,
+          'studentName'=> $studentName];
+        header('location:index.php');
+        exit;
+      }
+      catch(mysqli_sql_exception){
+        $err = "StudentID $studentID already exists.";
+      }
+      catch(Exception $e){
+        $err = $e;
+      }
      }
 ?>
 <!doctype html>
@@ -52,6 +65,11 @@
         <img class="mb-4" src="img/logo.png" alt="" width="130" height="">
         <!-- <img src="..." class="card-img" alt="...">         -->
         <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+        <?php
+    if(isset($err)){
+      echo "<div class='alert alert-danger'>$err</div>";
+    }
+    ?>
         <div class="form-floating mb-2">
           <input required name="studentID" type="text" class="form-control" id="student_id" placeholder="">
           <label for="student_id">Student ID</label>
