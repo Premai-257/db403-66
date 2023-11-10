@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])) {
 require 'connection.php';
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="th">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +19,7 @@ require 'connection.php';
   <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a href="./index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
       <img class="position-static top-20 start-100 bottom-50" src="img/aespa.png" alt="" width="180" height="">
-        <span class="ms-3 fs-4">Karina rocket puncher</span>
+        <span class="ms-3 fs-4">Karina Rocket Puncher</span>
       </a>
 
       <ul class="nav nav-pills">
@@ -37,5 +37,4 @@ require 'connection.php';
             <li><a class="dropdown-item" href="signout.php">Sign out</a></li>
           </ul>
         </div>
-</div>
     </header>
